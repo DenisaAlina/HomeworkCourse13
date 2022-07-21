@@ -13,24 +13,27 @@ public class DailyPlanner extends DaySchedule {
     }
 
     public void addActivity(DaysOfTheWeek day, String activity){
+            if(activity==null){
+                throw new CustomUncheckedException("NoActivityException");
+            }
             for(DaySchedule daySchedule : dayScheduleList){
                 if((daySchedule.getDay()).equals(day)){
-                    if(!(activity==null)){
                         (daySchedule.getActivities()).add(activity);
-                    }else{
-                        throw new CustomUncheckedException("No Activity Exception");
-                    }
                 }
             }
     }
 
     public void removeActivity(DaysOfTheWeek day, String activity){
+        if(activity==null){
+            throw new CustomUncheckedException("NoActivityException");
+        }
+
         for(DaySchedule daySchedule : dayScheduleList){
             if((daySchedule.getDay()).equals(day)){
-                if(!(activity==null)){
+                if(daySchedule.getActivities().contains(activity)){
                     daySchedule.getActivities().remove(activity);
                 }else{
-                    throw new CustomUncheckedException("NoActivityException");
+                    System.out.println(String.format("%s does not belong to %s list of activities!", activity, day));
                 }
             }
         }
